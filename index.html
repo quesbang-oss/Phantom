@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#050510">
+    <title>幻想音律 - Phantom Resonance</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="game-container">
+    <canvas id="game-canvas" aria-label="弾幕シューティング"></canvas>
+
+    <div id="mobile-ui" class="hidden">
+        <button id="bomb-btn" type="button">BOMB</button>
+        <button id="pause-btn" type="button">Ⅱ</button>
+    </div>
+
+    <div id="overlay" class="overlay">
+        <section id="title-screen" class="panel">
+            <h1 class="game-title">幻想音律</h1>
+            <p class="game-subtitle">PHANTOM RESONANCE</p>
+            <button id="start-btn" type="button">START GAME</button>
+
+            <div class="volume-controls">
+                <label>BGM <input type="range" id="bgm-vol" min="0" max="100" value="50"></label>
+                <label>SE <input type="range" id="se-vol" min="0" max="100" value="50"></label>
+            </div>
+
+            <p class="controls-hint">
+                PC: WASD / Arrow・Shift・Z / X<br>
+                Mobile: 画面をドラッグして移動
+            </p>
+        </section>
+
+        <section id="result-screen" class="panel hidden">
+            <h2 id="result-title">STAGE CLEAR</h2>
+            <div class="stats">
+                <p>SCORE: <span id="res-score">0</span></p>
+                <p>GRAZE: <span id="res-graze">0</span></p>
+                <p>HI-SCORE: <span id="res-hi-score">0</span></p>
+            </div>
+            <button id="retry-btn" type="button">RETRY</button>
+        </section>
+    </div>
+</div>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
