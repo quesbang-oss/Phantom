@@ -41,7 +41,6 @@ export class Renderer {
         for (const e of game.entities.enemies) {
             ctx.save();
 
-            // 敵画像が設定されている場合
             if (
                 e.sprite &&
                 e.sprite.complete &&
@@ -61,10 +60,7 @@ export class Renderer {
                     size,
                     size
                 );
-            }
-
-            // 画像がない場合は仮の円
-            else {
+            } else {
                 ctx.shadowBlur = e.isBoss ? 22 : 10;
                 ctx.shadowColor = e.isBoss
                     ? COLORS.BOSS
@@ -86,7 +82,6 @@ export class Renderer {
                 ctx.fill();
             }
 
-            // ボスHPバー
             if (e.isBoss) {
                 const width = 240;
                 const height = 5;
@@ -98,7 +93,7 @@ export class Renderer {
 
                 ctx.shadowBlur = 0;
 
-                ctx.fillStyle = "rgba(255,255,255,0.2)";
+                ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
 
                 ctx.fillRect(
                     e.x - width / 2,
@@ -186,10 +181,8 @@ export class Renderer {
 
         ctx.fill();
 
-        // 低速時の当たり判定
         if (player.isFocus) {
             ctx.shadowBlur = 0;
-
             ctx.fillStyle = "#ffffff";
 
             ctx.beginPath();
