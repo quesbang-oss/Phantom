@@ -7,12 +7,26 @@ export class Renderer {
     }
 
     render(game) {
-        this.drawBackground();
-        this.drawEnemies(game);
-        this.drawBullets(game);
-        this.drawPlayer(game.entities.player);
-        this.drawUI(game);
+    this.drawBackground();
+
+    // 敵
+    this.drawEnemies(game);
+
+    // 敵弾
+    for (const bullet of game.entities.enemyBullets) {
+        this.drawBullet(bullet);
     }
+
+    // 自機弾
+    for (const bullet of game.entities.bullets) {
+        this.drawBullet(bullet);
+    }
+
+    // 自機
+    this.drawPlayer(game.entities.player);
+
+    this.drawUI(game);
+}
 
     drawBackground() {
         const ctx = this.ctx;
