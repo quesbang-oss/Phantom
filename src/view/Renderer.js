@@ -60,7 +60,7 @@ export class Renderer {
                 e.sprite.complete &&
                 e.sprite.naturalWidth > 0
             ) {
-                const size = e.isBoss ? 96 : 48;
+                const size = e.isBoss ? 150 : 90;
 
                 ctx.shadowBlur = e.isBoss ? 22 : 10;
                 ctx.shadowColor = e.isBoss
