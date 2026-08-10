@@ -1,8 +1,6 @@
-import { CANVAS_W, COLORS } from "../constants.js";
-import { Bullet } from "./Bullet.js";
+import { COLORS } from "../constants.js";
 import { Patterns } from "../logic/Patterns.js";
 
-// Enemy.js
 export class Enemy {
     constructor(game, x, y, type = "normal") {
         this.game = game;
@@ -17,10 +15,9 @@ export class Enemy {
 
         this.radius = 14;
 
-        this.speed =
-            type === "fast"
-                ? 110
-                : 55;
+        this.speed = type === "fast"
+            ? 110
+            : 55;
 
         this.timer = 0;
         this.shotTimer = 0;
@@ -37,10 +34,33 @@ export class Enemy {
         this.timer += dt;
         this.shotTimer += dt;
 
+        // 下方向へ移動
         this.y += this.speed * dt;
 
+        // 画面外へ出たら削除
         if (this.y > 690) {
             this.isOut = true;
+            return;
+        }
+
+        // =========================
+        // 1秒ごとに自機狙い弾
+        // =========================
+        if (this.shotTimer >= 1.0) {
+            this.shotTimer = 0;
+
+            const player = this.game.entities.player;
+
+            const bullets = Patterns.aimed(
+                this,
+                player,
+                180,
+                COLORS.BULLET_RED
+            );
+
+            this.game.entities.enemyBullets.push(
+                ...bullets
+            );
         }
     }
 
