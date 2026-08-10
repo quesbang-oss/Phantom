@@ -2,20 +2,15 @@ import { CANVAS_W, COLORS } from "../constants.js";
 import { Bullet } from "./Bullet.js";
 import { Patterns } from "../logic/Patterns.js";
 
+// Enemy.js
 export class Enemy {
-    constructor(game, x, y, type = "normal") {
-        this.game = game;
+    constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.type = type;
-        this.hp = type === "fast" ? 8 : 15;
-        this.maxHp = this.hp;
-        this.radius = 14;
-        this.speed = type === "fast" ? 110 : 55;
-        this.timer = 0;
-        this.shotTimer = 0;
-        this.isDead = false;
-        this.isBoss = false;
+        this.hp = 100;
+        this.radius = 18;
+
+        this.sprite = null; // ← 後から画像を設定
     }
 
     update(dt) {
