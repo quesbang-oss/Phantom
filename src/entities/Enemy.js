@@ -1,3 +1,6 @@
+import { COLORS } from "../constants.js";
+import { Patterns } from "../logic/Patterns.js";
+
 const ENEMY_IMAGES = {
     normal: "assets/enemy.png",
     fast: "assets/enemy_fast.png"
