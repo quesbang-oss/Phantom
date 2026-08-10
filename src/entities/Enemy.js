@@ -4,35 +4,55 @@ import { Patterns } from "../logic/Patterns.js";
 
 // Enemy.js
 export class Enemy {
-    constructor(x, y) {
+    constructor(game, x, y, type = "normal") {
+        this.game = game;
+
         this.x = x;
         this.y = y;
-        this.hp = 100;
-        this.radius = 18;
 
-        this.sprite = null; // ← 後から画像を設定
+        this.type = type;
+
+        this.hp = type === "fast" ? 8 : 15;
+        this.maxHp = this.hp;
+
+        this.radius = 14;
+
+        this.speed =
+            type === "fast"
+                ? 110
+                : 55;
+
+        this.timer = 0;
+        this.shotTimer = 0;
+
+        this.isDead = false;
+        this.isOut = false;
+        this.isBoss = false;
+
+        // 敵画像
+        this.sprite = null;
     }
 
     update(dt) {
         this.timer += dt;
         this.shotTimer += dt;
+
         this.y += this.speed * dt;
 
-        if (this.shotTimer >= (this.type === "fast" ? 0.9 : 1.4)) {
-            this.shotTimer = 0;
-            const target = this.game.entities.player;
-            const bullets = Patterns.aimed(this, target, this.type === "fast" ? 180 : 145, COLORS.BULLET_RED);
-            this.game.entities.enemyBullets.push(...bullets);
+        if (this.y > 690) {
+            this.isOut = true;
         }
-
-        if (this.y > 690) this.isOut = true;
     }
 
     damage(amount) {
         this.hp -= amount;
+
         this.game.score += amount * 10;
+
         if (this.hp <= 0) {
+            this.hp = 0;
             this.isDead = true;
+
             this.game.score += 250;
         }
     }
