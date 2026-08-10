@@ -136,30 +136,29 @@ export class Player {
     }
 
     shoot() {
-        const bullets = this.game.entities.bullets;
+    const bulletLeft = new Bullet(
+        this.x - 6,
+        this.y - 12,
+        0,
+        -620,
+        COLORS.PLAYER,
+        4
+    );
 
-        bullets.push(
-            new Bullet(
-                this.x - 7,
-                this.y - 10,
-                0,
-                -620,
-                COLORS.PLAYER,
-                3
-            )
-        );
+    const bulletRight = new Bullet(
+        this.x + 6,
+        this.y - 12,
+        0,
+        -620,
+        COLORS.PLAYER,
+        4
+    );
 
-        bullets.push(
-            new Bullet(
-                this.x + 7,
-                this.y - 10,
-                0,
-                -620,
-                COLORS.PLAYER,
-                3
-            )
-        );
-    }
+    this.game.entities.bullets.push(
+        bulletLeft,
+        bulletRight
+    );
+}
 
     hit() {
         if (this.invincibility > 0) {
