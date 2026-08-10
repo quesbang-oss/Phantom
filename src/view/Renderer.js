@@ -117,14 +117,50 @@ export class Renderer {
     }
 
     drawBullets(game) {
-        for (const bullet of game.entities.enemyBullets) {
-            this.drawBullet(bullet);
-        }
+    const ctx = this.ctx;
 
-        for (const bullet of game.entities.bullets) {
-            this.drawBullet(bullet);
-        }
+    // 自機弾
+    for (const bullet of game.entities.bullets) {
+        ctx.save();
+
+        ctx.fillStyle = "#00ffff";
+        ctx.shadowColor = "#00ffff";
+        ctx.shadowBlur = 20;
+
+        ctx.beginPath();
+        ctx.arc(
+            bullet.x,
+            bullet.y,
+            8,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+        ctx.restore();
     }
+
+    // 敵弾
+    for (const bullet of game.entities.enemyBullets) {
+        ctx.save();
+
+        ctx.fillStyle = "#ff0055";
+        ctx.shadowColor = "#ff0055";
+        ctx.shadowBlur = 20;
+
+        ctx.beginPath();
+        ctx.arc(
+            bullet.x,
+            bullet.y,
+            8,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+        ctx.restore();
+    }
+}
 
     drawBullet(bullet) {
         const ctx = this.ctx;
